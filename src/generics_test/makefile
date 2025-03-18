@@ -1,4 +1,4 @@
-FLAGS := -Wall -Wextra -Wpedantic -g
+FLAGS := -Wall -Wextra -g -std=c11
 
 run:
 	gcc main.c $(FLAGS)

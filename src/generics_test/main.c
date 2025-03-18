@@ -1,13 +1,17 @@
 #include <stdio.h>
 
-#include "intvec.h"
-#include "floatpvec.h"
+#include "corevec.h"
 
 int main()
 {
-    Vector_int intvec = { 0 };
-    Vector_float_p floatvec = { 0 };
+    Vector_int *intvec = vnew(intvec);
+    Vector_float_p *floatvec = vnew(floatvec);
+    float f = 5.0;
+    float *p = &f;
 
-    return intvec.size + floatvec.size;
+    vadd(intvec, 5);
+    vadd(floatvec, p);
+
+    return intvec->size + floatvec->size;
 }
 
