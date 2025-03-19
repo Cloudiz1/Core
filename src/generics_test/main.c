@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-#include "corevec.h"
+#include "test.c"
 
 int main()
 {

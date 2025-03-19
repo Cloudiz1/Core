@@ -25,7 +25,7 @@
     Vector_float: vnew_float, \
     Vector_char_p: vnew_char_p, \
     Vector_int_p: vnew_int_p, \
-    Vector_float_p: vnew_float_p, \
+    Vector_float_p: vnew_float_p \
     )()
 
 #define vadd(v, e) _Generic((*v), \
@@ -34,6 +34,6 @@
     Vector_float: vadd_float, \
     Vector_char_p: vadd_char_p, \
     Vector_int_p: vadd_int_p, \
-    Vector_float_p: vadd_float_p, \
+    Vector_float_p: vadd_float_p \
     )((v), (e))
 

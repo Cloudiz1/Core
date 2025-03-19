@@ -1,3 +1,5 @@
+#include <stdlib.h>
+
 #if defined (GENTYPE)
 
 #ifndef GENTYPENAME

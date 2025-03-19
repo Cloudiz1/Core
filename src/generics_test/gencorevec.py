@@ -1,4 +1,11 @@
+import sys
+
+
 def generate(types: list[str], signatures: list[str]):
+    if types == [] or signatures == []:
+        print("invalid arguments", file=sys.stderr)
+        return
+
     file = open("test.c", "w")
 
     for type in types:
@@ -32,8 +39,9 @@ def generate(types: list[str], signatures: list[str]):
         for type in types:
             file.write(f"    Vector_{type}: {fname}_{type}, \\\n")
 
-        for type in types:
+        for type in types[:-1]:
             file.write(f"    Vector_{type}_p: {fname}_{type}_p, \\\n")
+        file.write(f"    Vector_{types[-1]}_p: {fname}_{types[-1]}_p \\\n")
 
         file.write(f"    )({param_grouped})\n")
         file.write(f"\n")
