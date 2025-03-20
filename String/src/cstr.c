@@ -17,7 +17,7 @@ String *snew(const char *input) {
 
 String *sadd(String *dest, const char *new) {
     dest->len += strlen(new);
-    void *out = realloc(dest->val, dest->len);
+    void *out = realloc(dest->val, dest->len + 1);
     if (out == NULL) return NULL;
 
     strcat(dest->val, new);
@@ -72,7 +72,7 @@ String *supper(String *input) {
         outval[i] = toupper(input->val[i]);
     }
 
-    outval[input->len + 1] = '\0';
+    outval[input->len] = '\0';
     return snew(outval);
 }
 
@@ -82,7 +82,7 @@ String *slower(String *input) {
         outval[i] = tolower(input->val[i]);
     }
 
-    outval[input->len + 1] = '\0';
+    outval[input->len] = '\0';
     return snew(outval);
 }
 
@@ -99,10 +99,10 @@ void sclear(String *input) {
 
 int sisempty(const String *input) {
     if (input->len == 0) {
-        return 0;
+        return 1;
     }
 
-    return 1;
+    return 0;
 }
 
 String *sreplace(String *input, const char *s1, const char *s2) {
