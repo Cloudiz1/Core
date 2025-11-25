@@ -1,6 +1,6 @@
 main:
-	gcc main.c -o out -Wall -Werror -Wpedantic
-	./out
+	gcc main.c -g -o o.out -Wall -Wpedantic
+	./o.out
 
 pre:
 	gcc -E main.c -o out.i

@@ -1,6 +1,6 @@
 #define ARENA_DEBUG
 #define ARENA_MINIMUM_MEMORY 16
-#include "arena.h"
+#include "../Core/arena.h"
 
 int main(void) {
   Arena a = arena_create();

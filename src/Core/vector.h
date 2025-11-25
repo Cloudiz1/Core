@@ -12,12 +12,48 @@
 #include <stdlib.h>
 #include <string.h>
 
+#ifndef NO_ARENA_VECTOR_IMPLEMENTATION
+#include "arena.h"
+
+#define ARENA_VECTOR_IMPLEMENTATION(type, alias)                               \
+  static inline vector_##alias vector_arena_create_##alias(Arena *a) {         \
+    vector_##alias v;                                                          \
+    v.capacity = VECTOR_BASE_CAPACITY;                                         \
+    v.size = 0;                                                                \
+    v.data = arena_alloc(a, VECTOR_BASE_CAPACITY * sizeof(type));              \
+    return v;                                                                  \
+  }                                                                            \
+                                                                               \
+  static inline void vector_arena_realloc_##alias(Arena *a,                    \
+                                                  vector_##alias *v) {         \
+    v->capacity *= VECTOR_GROWTH_RATE;                                         \
+    type *tmp = v->data;                                                       \
+    v->data = arena_alloc(a, v->capacity * sizeof(type));                      \
+    memcpy(v->data, tmp, v->size * sizeof(type));                              \
+  }                                                                            \
+                                                                               \
+  static inline void vector_arena_push_##alias(Arena *a, vector_##alias *v,    \
+                                               type e) {                       \
+    if (v->size == v->capacity) {                                              \
+      vector_arena_realloc_##alias(a, v);                                      \
+    }                                                                          \
+                                                                               \
+    v->data[v->size] = e;                                                      \
+    v->size++;                                                                 \
+  }
+
+#else
+#define ARENA_VECTOR_IMPLEMENTATION(type, alias)
+#endif
+
 #define DEFINE_VECTOR(type, alias)                                             \
   typedef struct {                                                             \
     type *data;                                                                \
     size_t capacity;                                                           \
     size_t size;                                                               \
   } vector_##alias;                                                            \
+                                                                               \
+  ARENA_VECTOR_IMPLEMENTATION(type, alias)                                     \
                                                                                \
   static inline vector_##alias vector_create_##alias() {                       \
     vector_##alias v;                                                          \

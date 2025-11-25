@@ -1,0 +1,4 @@
+- Tests!
+- Not sure if it is worth implementing an `sprintf` for vectors (probably not)
+- Slices would be really cool
+- I think it would be fun to implement an arena allocated vector!
