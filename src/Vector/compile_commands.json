@@ -1,0 +1,17 @@
+[
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-c",
+      "-Wall",
+      "-Werror",
+      "-Wpedantic",
+      "-o",
+      "out",
+      "main.c"
+    ],
+    "directory": "/home/vinny/Desktop/programs/Core/Vector",
+    "file": "/home/vinny/Desktop/programs/Core/Vector/main.c",
+    "output": "/home/vinny/Desktop/programs/Core/Vector/out"
+  }
+]
