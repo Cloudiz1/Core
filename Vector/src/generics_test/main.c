@@ -1,17 +1,29 @@
 #include <stdio.h>
 
-#include "test.c"
+#define GEN_TYPE char
+#include "varvec.c"
+
+#define GEN_TYPE int
+#include "varvec.c"
+
+#define GEN_TYPE float
+#include "varvec.c"
+
+#define GEN_TYPE char *
+#define GEN_TYPE_NAME char_p
+#include "varvec.c"
+
+#define GEN_TYPE int *
+#define GEN_TYPE_NAME int_p
+#include "varvec.c"
+
+#define GEN_TYPE float *
+#define GEN_TYPE_NAME float_p
+#include "varvec.c"
 
 int main()
 {
-    Vector_int *intvec = vnew(intvec);
-    Vector_float_p *floatvec = vnew(floatvec);
-    float f = 5.0;
-    float *p = &f;
-
-    vadd(intvec, 5);
-    vadd(floatvec, p);
-
-    return intvec->size + floatvec->size;
+    Vector_int intvec = Vector_Create_int();
+    Vector_float floatvec = Vector_Create_float();
 }
 

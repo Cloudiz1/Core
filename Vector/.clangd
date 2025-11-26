@@ -1,4 +1,5 @@
 CompileFlags:
   Add:
     - -I../include
-    - -DGENTYPE=char
+    - -DGEN_TYPE=double
+    - -DGEN_TYPE_NAME=doubletrouble

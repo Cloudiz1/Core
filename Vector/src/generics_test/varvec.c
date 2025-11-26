@@ -13,69 +13,67 @@ typedef struct
 {
     size_t size;
     size_t capacity;
-    GENTYPE *data;
+    GEN_TYPE *data;
 }
-GEN_TYPE;
+GEN_DATA;
 
-static inline GEN_TYPE
-GEN_NAME(create)()
+static inline GEN_DATA
+GEN_NAME(Create)()
 {
-    GEN_TYPE v;
+    GEN_DATA v;
     v.capacity = VECTOR_BASE_CAPACITY;
     v.size = 0;
-    v.data = malloc(sizeof(GEN_TYPE) * VECTOR_BASE_CAPACITY);
+    v.data = malloc(sizeof(GEN_DATA) * VECTOR_BASE_CAPACITY);
     return v;
 }
 
 static inline void
-GEN_NAME(realloc)(GEN_TYPE *v)
+GEN_NAME(Realloc)(GEN_DATA *v)
 {
     v->capacity *= VECTOR_GROWTH_RATE;
-    v->data = realloc(v->data, v->capacity * sizeof(GEN_TYPE));
+    v->data = realloc(v->data, v->capacity * sizeof(GEN_DATA));
 }
 
 static inline void
-GEN_NAME(push)(GEN_TYPE *v, GENTYPE e)
+GEN_NAME(Push)(GEN_DATA *v, GEN_TYPE e)
 {
     if (v->size == v->capacity)
     {
-      GEN_NAME(realloc)(v);
+      GEN_NAME(Realloc)(v);
     }
 
     v->data[v->size] = e;
-    v->size++;
-}
-
-static inline GENTYPE
-GEN_NAME(pop)(GEN_TYPE *v)
-{
-    if (v->size == 0)
-    {
-      printf("Can't call vector_pop() on an empty vector.\n");
-      exit(1);
-    }
-
-    v->size--;
-    return v->data[v->size];
+    v->size += 1;
 }
 
 static inline GEN_TYPE
-GEN_NAME(clone)(GEN_TYPE *v)
+GEN_NAME(Pop)(GEN_DATA *v)
 {
-    GEN_TYPE o;
+    if (v->size == 0)
+    {
+      fprintf(stderr, "Can't call vector_pop() on an empty vector.\n");
+    }
+
+    v->size -= 1;
+    return v->data[v->size];
+}
+
+static inline GEN_DATA
+GEN_NAME(Clone)(GEN_DATA *v)
+{
+    GEN_DATA o;
     o.capacity = v->capacity;
     o.size = v->size;
-    o.data = malloc(sizeof(GENTYPE) * v->capacity);
-    memcpy(o.data, v->data, v->size * sizeof(GENTYPE));
+    o.data = malloc(sizeof(GEN_TYPE) * v->capacity);
+    memcpy(o.data, v->data, v->size * sizeof(GEN_TYPE));
     return o;
 }
 
 static inline void
-GEN_NAME(free)(GEN_TYPE *v)
+GEN_NAME(Free)(GEN_DATA *v)
 {
     free(v->data);
 }
-
 
 #undef VECTOR_BASE_CAPACITY
 #undef VECTOR_GROWTH_RATE
